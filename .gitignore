@@ -1,0 +1,14 @@
+*.iml
+.gradle
+/local.properties
+.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+build/
+*.apk
+*.aab
+# Contiene claves de tu proyecto Firebase: no se sube al repositorio.
+google-services.json
