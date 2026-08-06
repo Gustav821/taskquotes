@@ -7,8 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.taskquotes.ui.screens.AddTaskScreen
 import com.example.taskquotes.ui.screens.LoginScreen
-import com.example.taskquotes.ui.screens.QuotesScreen
 import com.example.taskquotes.ui.screens.TaskListScreen
+import com.example.taskquotes.ui.screens.TriviaScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
@@ -27,7 +27,7 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
         composable(Screen.Tasks.route) {
             TaskListScreen(
                 onAddTask = { navController.navigate(Screen.AddTask.route) },
-                onOpenQuotes = { navController.navigate(Screen.Quotes.route) },
+                onOpenTrivia = { navController.navigate(Screen.Trivia.route) },
                 onLogout = {
                     navController.navigate(Screen.Login.route) {
                         popUpTo(0)
@@ -40,8 +40,8 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             AddTaskScreen(onDone = { navController.popBackStack() })
         }
 
-        composable(Screen.Quotes.route) {
-            QuotesScreen(onBack = { navController.popBackStack() })
+        composable(Screen.Trivia.route) {
+            TriviaScreen(onBack = { navController.popBackStack() })
         }
     }
 }

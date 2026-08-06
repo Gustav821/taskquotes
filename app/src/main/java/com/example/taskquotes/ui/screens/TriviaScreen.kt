@@ -9,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,18 +24,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.taskquotes.viewmodel.QuoteViewModel
+import com.example.taskquotes.viewmodel.TriviaViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuotesScreen(onBack: () -> Unit, viewModel: QuoteViewModel = viewModel()) {
-    val quotes by viewModel.quotes.collectAsState()
+fun TriviaScreen(onBack: () -> Unit, viewModel: TriviaViewModel = viewModel()) {
+    val trivia by viewModel.trivia.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val error by viewModel.errorMessage.collectAsState()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Frases (API REST)") },
+                title = { Text("Trivia (API REST)") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
@@ -54,10 +56,10 @@ fun QuotesScreen(onBack: () -> Unit, viewModel: QuoteViewModel = viewModel()) {
                 .padding(padding)
         ) {
             when {
-                isLoading && quotes.isEmpty() -> {
+                isLoading && trivia.isEmpty() -> {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
-                error != null && quotes.isEmpty() -> {
+                error != null && trivia.isEmpty() -> {
                     Text(
                         "Error: $error\n(Verifica tu conexión a internet)",
                         modifier = Modifier
@@ -67,10 +69,12 @@ fun QuotesScreen(onBack: () -> Unit, viewModel: QuoteViewModel = viewModel()) {
                 }
                 else -> {
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(quotes, key = { it.id }) { quote ->
+                        items(trivia, key = { it.id }) { question ->
                             ListItem(
-                                headlineContent = { Text("\"${quote.quote}\"") },
-                                supportingContent = { Text("— ${quote.author}") }
+                                headlineContent = { Text(question.question) },
+                                supportingContent = {
+                                    Text("Respuesta: ${question.correctAnswer} · ${question.category} (${question.difficulty})")
+                                }
                             )
                             HorizontalDivider()
                         }

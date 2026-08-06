@@ -7,14 +7,14 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface QuoteDao {
+interface TriviaDao {
 
-    @Query("SELECT * FROM quotes")
-    fun getAllQuotes(): Flow<List<QuoteEntity>>
+    @Query("SELECT * FROM trivia")
+    fun getAllTrivia(): Flow<List<TriviaEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertQuotes(quotes: List<QuoteEntity>)
+    suspend fun insertTrivia(trivia: List<TriviaEntity>)
 
-    @Query("DELETE FROM quotes")
-    suspend fun clearQuotes()
+    @Query("DELETE FROM trivia")
+    suspend fun clearTrivia()
 }

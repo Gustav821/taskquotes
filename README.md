@@ -11,9 +11,10 @@ pública (Retrofit) y control de versiones con **Git/GitHub**.
 2. **Mis Tareas**: lista de tareas persistida localmente con **Room** (funciona
    sin internet). Un botón "Sincronizar" sube las tareas pendientes a
    **Cloud Firestore** cuando hay sesión iniciada.
-3. **Frases**: consume la API REST pública `https://dummyjson.com/quotes`
-   mediante **Retrofit**, y guarda el resultado en Room como caché offline
-   (patrón offline-first: la UI siempre observa la base de datos local).
+3. **Trivia**: consume la API REST pública `https://opentdb.com/api.php`
+   (Open Trivia Database) mediante **Retrofit**, y guarda el resultado en Room
+   como caché offline (patrón offline-first: la UI siempre observa la base de
+   datos local).
 
 ## Tecnologías y dónde están
 
@@ -60,7 +61,7 @@ commit inicial. Para publicarlo en tu cuenta de GitHub:
 
 ```bash
 cd TaskQuotes
-git remote add origin https://github.com/<tu-usuario>/TaskQuotes.git
+git remote add origin https://github.com/Gustav821/taskquotes.git
 git branch -M main
 git push -u origin main
 ```
@@ -75,10 +76,10 @@ app/src/main/java/com/example/taskquotes/
 ├── data/
 │   ├── local/         Room: Entity, DAO, Database
 │   ├── remote/         Retrofit: modelos y servicio de la API REST
-│   └── repository/     Repositorios (Auth, Task, Quote)
+│   └── repository/     Repositorios (Auth, Task, Trivia)
 ├── navigation/          Rutas y NavHost de Jetpack Compose
 ├── ui/
-│   ├── screens/         Pantallas Compose (Login, Tareas, Agregar, Frases)
+│   ├── screens/         Pantallas Compose (Login, Tareas, Agregar, Trivia)
 │   └── theme/           Tema Material3
 ├── viewmodel/           ViewModels (MVVM)
 ├── util/                Utilidades (Resource<T>)
